@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Record Tab</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            height: 100vh;
+
+            /* Grid */
+            display: grid;
+            grid-template-rows: auto 1fr;
+            justify-items: center;
+            row-gap: 20px;
+        }
+
+        .update-main {
+            grid-row: 1/2;
+            display: grid;
+            grid-auto-rows: auto;
+            row-gap: 5px;
+        }
+
+        .update-main h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form class="update-main" action="/updateCaseInfo" method="post">
+            <h3>UPDATE TAB:</h3>
+            <input type="text" name="updatecaseid" placeholder="Case ID" value="{{ editcaseid }}" required />
+            <input type="text" name="updatecasedesc" placeholder="Case Description" value="{{ editcasedesc }}" required />
+            <select name="updatecasestatus" required>
+                <option value="">Select Case Status</option>
+                <option value="Clear" {% if editcasestatus == 'Clear' %}selected{% endif %}>Clear</option>
+                <option value="Warning" {% if editcasestatus == 'Warning' %}selected{% endif %}>Warning</option>
+                <option value="Suspended" {% if editcasestatus == 'Suspended' %}selected{% endif %}>Suspended</option>
+            </select>            
+            <input type="submit" name="update" value="UPDATE" />
+            <input type="hidden" name="updatecaseid" value="{{ editcaseid }}" />
+        </form>
+    </div>
+</body>
+</html>

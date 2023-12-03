@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDICAL RECORD</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+</head>
+<body>
+    <div class="submain">
+        <h3>MEDICAL RECORD</h3>
+        <table class="read-main">
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Sex</th>
+                <th>Birthdate</th>
+                <th>Medical Code</th>
+                <th>Medical ID</th>
+                <th>Barangay ID</th>
+                <th>BMI Classification</th>
+                <th>Medical Condition</th>
+                <th>COVID Vaccinated?</th>
+                <th>Taking Maintenance Medicine?</th>
+                <th>Physical Fitness</th>
+                <th>Action</th>
+            </tr>
+            {% for record in medicalinfo %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
+                    <td>{{ record[7] }}</td>
+                    <td>{{ record[8] }}</td>
+                    <td>{{ record[9] }}</td>
+                    <td>{{ record[10] }}</td>
+                    <td>{{ record[11] }}</td>
+                    <td>{{ record[12] }}</td>
+                    <td>
+                        <form action="/medicalinfo" method="post">
+                            <input type="submit" name="edit" value="EDIT">
+                            <input type="hidden" name="editmedicalid" value="{{ record[6] }}">
+                            <input type="hidden" name="editbmiclassification" value="{{ record[8] }}">
+                            <input type="hidden" name="editmedicalcondition" value="{{ record[9] }}">
+                            <input type="hidden" name="editcovidvaccinated" value="{{ record[10] }}">
+                            <input type="hidden" name="editmaintenancemedicine" value="{{ record[11] }}">
+                            <input type="hidden" name="editphysicalfitness" value="{{ record[12] }}">
+                            <input type="hidden" name="action" value="edit">
+                        </form>
+                        <form action="/medicalinfo" method="post">
+                            <input type="submit" name="delete" value="DELETE">
+                            <input type="hidden" name="deletemedicalid" value="{{ record[6] }}">
+                            <input type="hidden" name="action" value="delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

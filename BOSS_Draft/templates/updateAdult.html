@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Record Tab</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            height: 100vh;
+
+            /* Grid */
+            display: grid;
+            grid-template-rows: auto 1fr;
+            justify-items: center;
+            row-gap: 20px;
+        }
+
+        .update-main {
+            grid-row: 1/2;
+            display: grid;
+            grid-auto-rows: auto;
+            row-gap: 5px;
+        }
+
+        .update-main h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form class="update-main" action="/updateAdultInfo" method="post">
+            <h3>UPDATE TAB:</h3>
+            <input type="text" name="updateemployeeid" placeholder="Employee ID" value="{{ editemployeeid }}" required />
+            <select name="updateemploymentstatus" required>
+                <option value="">Employment Status</option>
+                <option value="Employed" {% if editemploymentstatus == 'Employed' %}selected{% endif %}>Employed</option>
+                <option value="Unemployed" {% if editemploymentstatus == 'Unemployed' %}selected{% endif %}>Unemployed</option>
+                <option value="Self-employed" {% if editemploymentstatus == 'Self-employed' %}selected{% endif %}>Self-employed</option>
+            </select>
+            <input type="text" name="updatemonthlyincome" placeholder="Monthly Income (e.g. 1234.00)" value="{{ editmonthlyincome }}" required />
+            <input type="submit" name="update" value="UPDATE" />
+            <input type="hidden" name="updateemployeeid" value="{{ editemployeeid }}" />
+        </form>
+    </div>
+</body>
+</html>
