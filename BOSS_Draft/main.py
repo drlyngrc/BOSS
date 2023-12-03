@@ -17,6 +17,7 @@ from student import Student
 from derived_tables import DerivedTables
 from appointment import Appointment
 
+
 app = Flask(__name__)
 app.secret_key = 'BOSS'
 
@@ -35,6 +36,7 @@ student_instance = Student(read_instance, delete_instance, update_instance)
 derived_tables_instance = DerivedTables(read_instance)
 appointment_instance = Appointment(read_instance, delete_instance, update_instance)
 
+
 def save_file(file):
     upload_folder = "uploads"
 
@@ -45,10 +47,107 @@ def save_file(file):
     file.save(filename)
     return filename
 
-
 @app.route("/admin")
 def home():
     return render_template("adminhome.html")
+
+@app.route("/appointment", methods=["GET", "POST"])
+def appointment():
+    return appointment_instance.appointment(request)
+
+@app.route("/updateAppointment", methods=["GET", "POST"])
+def updateAppointment():
+    return appointment_instance.updateAppointment(request)
+
+@app.route("/residentinfo", methods=["GET", "POST"])
+def residentinfo_route():
+    return resident_instance.residentinfo(request)
+
+@app.route("/updateResidentInfo", methods=["GET", "POST"])
+def updateResidentInfo_route():
+    return resident_instance.updateResidentInfo(request)
+
+@app.route("/medicalinfo", methods=["GET", "POST"])
+def medicalinfo_route():
+    return medical_instance.medicalinfo(request)
+
+@app.route("/updateMedicalInfo", methods=["GET", "POST"])
+def updateMedicalInfo_route():
+    return medical_instance.updateMedicalInfo(request)
+
+@app.route("/addressinfo", methods=["GET", "POST"])
+def addressinfo_route():
+    return address_instance.addressinfo(request)
+
+@app.route("/updateAddressInfo", methods=["GET", "POST"])
+def updateAddressInfo_route():
+    return address_instance.updateAddressInfo(request)
+
+@app.route("/caseinfo", methods=["GET", "POST"])
+def caseinfo_route():
+    return case_instance.caseinfo(request)
+
+@app.route("/updateCaseInfo", methods=["GET", "POST"])
+def updateCaseInfo_route():
+    return case_instance.updateCaseInfo(request)
+
+@app.route("/adultinfo", methods=["GET", "POST"])
+def adultinfo_route():
+    return adult_instance.adultinfo(request)
+
+@app.route("/updateAdultInfo", methods=["GET", "POST"])
+def updateAdultInfo_route():
+    return adult_instance.updateAdultInfo(request)
+
+@app.route("/studentinfo", methods=["GET", "POST"])
+def studentinfo_route():
+    return student_instance.studentinfo(request)
+
+@app.route("/updateStudentInfo", methods=["GET", "POST"])
+def updateStudentInfo_route():
+    return student_instance.updateStudentInfo(request)
+
+@app.route("/householdinfo", methods=["GET", "POST"])
+def householdinfo_route():
+    return derived_tables_instance.householdinfo(request)
+
+@app.route("/incomerecord", methods=["GET", "POST"])
+def incomerecord_route():
+    return derived_tables_instance.incomerecord(request)
+
+@app.route("/unemploymentinfo", methods=["GET", "POST"])
+def unemploymentinfo_route():
+    return derived_tables_instance.unemploymentinfo()
+
+@app.route("/scholarshipinfo", methods=["GET", "POST"])
+def scholarshipinfo_route():
+    return derived_tables_instance.scholarshipinfo()
+
+###############################################################################################
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        admin_info = read_instance.read_admininfo(username)
+        user_info = read_instance.read_userinfo(username)
+
+        if admin_info:
+            if password == admin_info[0][5]:
+                session['username'] = username
+                session['admin_info'] = admin_info[0]
+                return render_template('adminhome.html')
+        elif user_info:
+            if password == user_info[0][2]:
+                session['username'] = username
+                session['user_info'] = user_info[0]
+                return render_template('#userhome.html')
+
+        return render_template('login.html', error='Invalid username or password')
+
+    return render_template('login.html')
 
 ###############################################################################################
 
@@ -165,104 +264,6 @@ def download(file_id):
     return send_file(filepath, as_attachment=True)
 
 ###############################################################################################
-
-@app.route("/appointment", methods=["GET", "POST"])
-def appointment():
-    return appointment_instance.appointment(request)
-
-@app.route("/updateAppointment", methods=["GET", "POST"])
-def updateAppointment():
-    return appointment_instance.updateAppointment(request)
-
-@app.route("/residentinfo", methods=["GET", "POST"])
-def residentinfo_route():
-    return resident_instance.residentinfo(request)
-
-@app.route("/updateResidentInfo", methods=["GET", "POST"])
-def updateResidentInfo_route():
-    return resident_instance.updateResidentInfo(request)
-
-@app.route("/medicalinfo", methods=["GET", "POST"])
-def medicalinfo_route():
-    return medical_instance.medicalinfo(request)
-
-@app.route("/updateMedicalInfo", methods=["GET", "POST"])
-def updateMedicalInfo_route():
-    return medical_instance.updateMedicalInfo(request)
-
-@app.route("/addressinfo", methods=["GET", "POST"])
-def addressinfo_route():
-    return address_instance.addressinfo(request)
-
-@app.route("/updateAddressInfo", methods=["GET", "POST"])
-def updateAddressInfo_route():
-    return address_instance.updateAddressInfo(request)
-
-@app.route("/caseinfo", methods=["GET", "POST"])
-def caseinfo_route():
-    return case_instance.caseinfo(request)
-
-@app.route("/updateCaseInfo", methods=["GET", "POST"])
-def updateCaseInfo_route():
-    return case_instance.updateCaseInfo(request)
-
-@app.route("/adultinfo", methods=["GET", "POST"])
-def adultinfo_route():
-    return adult_instance.adultinfo(request)
-
-@app.route("/updateAdultInfo", methods=["GET", "POST"])
-def updateAdultInfo_route():
-    return adult_instance.updateAdultInfo(request)
-
-@app.route("/studentinfo", methods=["GET", "POST"])
-def studentinfo_route():
-    return student_instance.studentinfo(request)
-
-@app.route("/updateStudentInfo", methods=["GET", "POST"])
-def updateStudentInfo_route():
-    return student_instance.updateStudentInfo(request)
-
-@app.route("/householdinfo", methods=["GET", "POST"])
-def householdinfo_route():
-    return derived_tables_instance.householdinfo(request)
-
-@app.route("/incomerecord", methods=["GET", "POST"])
-def incomerecord_route():
-    return derived_tables_instance.incomerecord(request)
-
-@app.route("/unemploymentinfo", methods=["GET", "POST"])
-def unemploymentinfo_route():
-    return derived_tables_instance.unemploymentinfo()
-
-@app.route("/scholarshipinfo", methods=["GET", "POST"])
-def scholarshipinfo_route():
-    return derived_tables_instance.scholarshipinfo()
-
-###############################################################################################
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        admin_info = read_instance.read_admininfo(username)
-        user_info = read_instance.read_userinfo(username)
-
-        if admin_info:
-            if password == admin_info[0][5]:
-                session['username'] = username
-                session['admin_info'] = admin_info[0]
-                return render_template('adminhome.html')
-        elif user_info:
-            if password == user_info[0][2]:
-                session['username'] = username
-                session['user_info'] = user_info[0]
-                return render_template('#userhome.html')
-
-        return render_template('login.html', error='Invalid username or password')
-
-    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
