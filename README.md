@@ -3,7 +3,7 @@
 
 <!-- Badges -->
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/projectname.svg?style=social&label=Star&maxAge=2592000)](https://github.com/drlyngrc/BOSS_admin)
+[![GitHub stars](https://img.shields.io/github/stars/drlyngrc/BOSS_admin.svg?style=social&label=Star&maxAge=2592000)](https://github.com/drlyngrc/BOSS_admin)
 
 <!-- Description -->
 ## 📄 Description
