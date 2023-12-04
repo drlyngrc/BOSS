@@ -1,5 +1,5 @@
 <!-- Project Title -->
-# 🚀 Project Name
+# BOSS (Barangay Online Service System)
 
 <!-- Badges -->
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@
 <!-- Description -->
 ## 📄 Description
 
-A concise description of the project highlighting its purpose and main functionalities.
+BOSS (Barangay Online Service System) is a comprehensive system designed to facilitate various services within a barangay online. It simplifies and centralizes processes for community services, aiming to streamline interactions between residents and the local government.
 
 <!-- Table of Contents -->
 ## 📋 Table of Contents
@@ -19,32 +19,35 @@ A concise description of the project highlighting its purpose and main functiona
 - [Installation](#-installation)
 - [Usage](#-usage)
 - [Database Schema](#-database-schema)
-- [Contributing](#-contributing)
+- [Contributors](#-contributors)
+- [Project Context](#-project-context)
 - [License](#-license)
 
 <!-- Introduction -->
 ## 🌟 Introduction
 
-An elaborate overview of the project, its objectives, and significance.
+BOSS (Barangay Online Service System) is a project developed as part of Object-Oriented Programming (OOP) and Database Management Systems (DBMS) coursework. It aims to offer a comprehensive online platform for various barangay services.
 
 <!-- Features -->
 ## ✨ Features
 
-- List main features with brief descriptions.
-- Highlight any unique functionalities.
+- Streamlined service requests for residents
+- Admin portal for barangay officials to manage services
+- Database integration for efficient data handling
+- Responsive web design for user-friendly interface
 
 <!-- Technologies Used -->
 ## 🔧 Technologies Used
 
-- Programming Languages: [List languages used]
+- Programming Languages: Python, HTML, CSS, SQL
+- Frameworks: [Any frameworks used]
 - Database: [Database management system used]
-- Frameworks: [If any]
 - Other tools: [e.g., IDE, version control]
 
 <!-- Installation -->
 ## ⚙️ Installation
 
-1. Clone the repository: `git clone https://github.com/yourusername/projectname.git`
+1. Clone the repository: `git clone https://github.com/drlyngrc/BOSS_admin.git`
 2. Install dependencies: `command or steps to install dependencies`
 3. Additional configuration steps, if any.
 
@@ -59,13 +62,19 @@ An elaborate overview of the project, its objectives, and significance.
 
 Include a visual representation or textual description of your database schema if applicable.
 
-<!-- Contributing -->
-## 🤝 Contributing
+<!-- Contributors -->
+## 👥 Contributors
 
-If open to contributions:
-- Guidelines for contributing
-- How to fork the repository
-- How to submit changes or new features
+- Barican, John Andrei A.
+- Guinoban, Glenn M.
+- Lalongisip, Darlyne Grace M.
+- Magnaye, James Michael D.
+- Zamora, Clarence C.
+
+<!-- Project Context -->
+## 🌐 Project Context
+
+This project was developed as a collaborative effort for an Object-Oriented Programming (OOP) and Database Management Systems (DBMS) course. 
 
 <!-- License -->
 ## 📜 License
