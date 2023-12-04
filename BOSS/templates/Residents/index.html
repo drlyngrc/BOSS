@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRGY Portal</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="flex-container">
+        <form action="{{ url_for('login_route') }}" method="post">
+            <a href="{{ url_for('login') }}">Login as an Admin</a>
+            <br><br>
+            <input name="barangayid" type="text" placeholder="Barangay Code">
+            <br><br>
+            <input name="password" type="password" placeholder="Password">
+            <br>
+            {% if error %}
+                <p id="error-message" style="margin-top: 5px; font-size: 0.75rem; font-family: Arial, Helvetica, sans-serif;">{{error}}</p>
+            {% endif %}
+            <br>
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+
+    <script>
+        if (performance.navigation.type === 1) {
+            var errorMessage = document.getElementById("error-message");
+            if (errorMessage) {
+                errorMessage.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
