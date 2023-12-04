@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARANGAY CASE RECORD</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+</head>
+<body>
+    <div class="submain">
+        <form class="create-main" action="/caseinfo" method="post">
+            <h3>BARANGAY CASE RECORD</h3>
+            <input type="text" name="bid" placeholder="Barangay ID" required />
+            <input type="text" name="casedesc" placeholder="Case Description" required />
+            <select name="casestatus" required>
+                <option value="">Select Case Status</option>
+                <option value="Clear">Clear</option>
+                <option value="Warning">Warning</option>
+                <option value="Suspended">Suspended</option>
+            </select>
+            <input type="hidden" name="action" value="create">
+            <input type="submit" value="SUBMIT" />
+        </form>
+        
+        <table class="read-main">
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Case Code</th>
+                <th>Case ID</th>
+                <th>Barangay ID</th>
+                <th>Case Description</th>
+                <th>Case Status</th>
+                <th>Action</th>
+            </tr>
+            {% for record in caseinfo %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
+                    <td>{{ record[7] }}</td>
+                    <td>
+                        <form action="/caseinfo" method="post">
+                            <input type="submit" name="edit" value="EDIT">
+                            <input type="hidden" name="editcaseid" value="{{ record[4] }}">
+                            <input type="hidden" name="editcasedesc" value="{{ record[6] }}">
+                            <input type="hidden" name="editcasestatus" value="{{ record[7] }}">
+                            <input type="hidden" name="action" value="edit">
+                        </form>
+                        <form action="/caseinfo" method="post">
+                            <input type="submit" name="delete" value="DELETE">
+                            <input type="hidden" name="deletecaseid" value="{{ record[4] }}">
+                            <input type="hidden" name="action" value="delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

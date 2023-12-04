@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Record Tab</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            height: 100vh;
+
+            /* Grid */
+            display: grid;
+            grid-template-rows: auto 1fr;
+            justify-items: center;
+            row-gap: 20px;
+        }
+
+        .update-main {
+            grid-row: 1/2;
+            display: grid;
+            grid-auto-rows: auto;
+            row-gap: 5px;
+        }
+
+        .update-main h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form class="update-main" action="/updateAddressInfo" method="post">
+            <h3>UPDATE TAB:</h3>
+            <input type="text" name="updateaddressid" placeholder="Address ID" value="{{ editaddressid }}" required />
+            <input type="text" name="updatehouseholdno" placeholder="Household No." value="{{ edithouseholdno }}" required />
+            <input type="text" name="" placeholder="Zone" value="{{ editzone }}" required />
+            <select name="updatezone" required>
+                <option value="">Zone</option>
+                <option value="1" {% if editzone == '1' %}selected{% endif %}>Zone 1</option>
+                <option value="2" {% if editzone == '2' %}selected{% endif %}>Zone 2</option>
+                <option value="3" {% if editzone == '3' %}selected{% endif %}>Zone 3</option>
+                <option value="4" {% if editzone == '4' %}selected{% endif %}>Zone 4</option>
+                <option value="5" {% if editzone == '5' %}selected{% endif %}>Zone 5</option>
+            </select>
+            <input type="text" name="updatestreetname" placeholder="Street Name" value="{{ editstreetname }}" required />
+            <input type="text" name="updatecity" placeholder="City" value="{{ editcity }}" required />
+            <input type="text" name="updateprovince" placeholder="Province" value="{{ editprovince }}" required />
+            <input type="submit" name="update" value="UPDATE" />
+            <input type="hidden" name="updateaddressid" value="{{ editaddressid }}" />
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADDRESS RECORD</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+</head>
+<body>
+    <div class="submain">
+        <h3>ADDRESS RECORD</h3>
+        <table class="read-main">
+            <tr>
+                <th>Address Code</th>
+                <th>Address ID</th>
+                <th>Barangay ID</th>
+                <th>Household No.</th>
+                <th>Zone</th>
+                <th>Street Name</th>
+                <th>City</th>
+                <th>Province</th>
+                <th>Action</th>
+            </tr>
+            {% for record in addressinfo %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
+                    <td>{{ record[7] }}</td>
+                    <td>
+                        <form action="/addressinfo" method="post">
+                            <input type="submit" name="edit" value="EDIT">
+                            <input type="hidden" name="editaddressid" value="{{ record[1] }}">
+                            <input type="hidden" name="edithouseholdno" value="{{ record[3] }}">
+                            <input type="hidden" name="editzone" value="{{ record[4] }}">
+                            <input type="hidden" name="editstreetname" value="{{ record[5] }}">
+                            <input type="hidden" name="editcity" value="{{ record[6] }}">
+                            <input type="hidden" name="editprovince" value="{{ record[7] }}">
+                            <input type="hidden" name="action" value="edit">
+                        </form>
+                        <form action="/addressinfo" method="post">
+                            <input type="submit" name="delete" value="DELETE">
+                            <input type="hidden" name="deleteaddressid" value="{{ record[1] }}">
+                            <input type="hidden" name="action" value="delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

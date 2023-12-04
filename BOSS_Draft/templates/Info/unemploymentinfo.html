@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNEMPLOYMENT RECORD</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+</head>
+<body>
+    <div class="submain">
+        <h3>UNEMPLOYMENT RECORD</h3>
+        <table class="read-main">
+            <tr>
+                <th>Barangay ID</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Employment Status</th>
+            </tr>
+            {% for record in unemploymentinfo %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

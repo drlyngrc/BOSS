@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADULT RESIDENT RECORD</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+</head>
+<body>
+    <div class="submain">
+        <h3>ADULT RESIDENT RECORD</h3>
+        <table class="read-main">
+            <tr>
+                <th>Employee Code</th>
+                <th>Employee ID</th>
+                <th>Barangay ID</th>
+                <th>Employment Status</th>
+                <th>Monthly Income</th>
+                <th>Action</th>
+            </tr>
+            {% for record in adultinfo %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>
+                        <form action="/adultinfo" method="post">
+                            <input type="submit" name="edit" value="EDIT">
+                            <input type="hidden" name="editemployeeid" value="{{ record[1] }}">
+                            <input type="hidden" name="editemploymentstatus" value="{{ record[3] }}">
+                            <input type="hidden" name="editmonthlyincome" value="{{ record[4] }}">
+                            <input type="hidden" name="action" value="edit">
+                        </form>
+                        <form action="/adultinfo" method="post">
+                            <input type="submit" name="delete" value="DELETE">
+                            <input type="hidden" name="deleteemployeeid" value="{{ record[1] }}">
+                            <input type="hidden" name="action" value="delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

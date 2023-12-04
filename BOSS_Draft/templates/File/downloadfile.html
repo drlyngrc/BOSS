@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Files</title>
+</head>
+<body>
+    <h1>Download Forms</h1>
+    <ul>
+        {% for file in files %}
+            <li>
+                <a href="/download/{{ file[0] }}">{{ file[1] }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

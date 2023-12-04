@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Record Tab</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            height: 100vh;
+
+            /* Grid */
+            display: grid;
+            grid-template-rows: auto 1fr;
+            justify-items: center;
+            row-gap: 20px;
+        }
+
+        .update-main {
+            grid-row: 1/2;
+            display: grid;
+            grid-auto-rows: auto;
+            row-gap: 5px;
+        }
+
+        .update-main h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form class="update-main" action="/updateResidentInfo" method="post">
+            <h3>UPDATE TAB:</h3>
+            <input type="text" name="updatebarangayid" placeholder="Barangay ID" value="{{ editbarangayid }}" required />
+            <select name="updatecategory" required>
+                <option value="">Select Category</option>
+                <option value="Adult" {% if editcategory == 'Adult' %}selected{% endif %}>Adult</option>
+                <option value="Student" {% if editcategory == 'Student' %}selected{% endif %}>Student</option>
+                <option value="Others" {% if editcategory == 'Others' %}selected{% endif %}>Others</option>
+            </select>
+            <input type="text" name="updatelastname" placeholder="Last Name" value="{{ editlastname }}" required />
+            <input type="text" name="updatefirstname" placeholder="Barangay ID" value="{{ editfirstname }}" required />
+            <input type="text" name="updatemiddlename" placeholder="Barangay ID" value="{{ editmiddlename }}" required />
+            <select name="updatesex" required>
+                <option value="">Sex</option>
+                <option value="Male" {% if editsex == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if editsex == 'Female' %}selected{% endif %}>Female</option>
+            </select>
+            <input type="date" name="updatebirthdate" placeholder="Birthdate" value="{{ editbirthdate }}" required />
+            <input type="text" name="updatebirthplace" placeholder="Birthplace" value="{{ editbirthplace }}" required />
+            <input type="text" name="updatereligion" placeholder="Religion" value="{{ editreligion }}" required />
+            <select name="updatecivilstat" required>
+                <option value="">Civil Status</option>
+                <option value="Single" {% if editcivilstat == 'Single' %}selected{% endif %}>Single</option>
+                <option value="Married" {% if editcivilstat == 'Married' %}selected{% endif %}>Married</option>
+                <option value="Widowed" {% if editcivilstat == 'Widowed' %}selected{% endif %}>Widowed</option>
+            </select>
+            <input type="text" name="updatecitizenship" placeholder="Citizenship" value="{{ editcitizenship }}" required />
+            <input type="text" name="updatevoterprecinct" placeholder="Voter Precinct No." value="{{ editvoterprecinct }}" required />
+            <input type="text" name="updatecontactno" placeholder="Contact Number" value="{{ editcontactno }}" required />
+            <input type="###" name="updateprofile_picture" placeholder="Profile Picture" value="{{ editprofile_picture }}" />
+            <input type="submit" name="update" value="UPDATE" />
+            <input type="hidden" name="updatebarangayid" value="{{ editbarangayid }}" />
+        </form>
+    </div>
+</body>
+</html>

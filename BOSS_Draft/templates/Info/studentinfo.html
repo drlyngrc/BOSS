@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT RESIDENT RECORD</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+</head>
+<body>
+    <div class="submain">
+        <h3>STUDENT RESIDENT RECORD</h3>
+        <table class="read-main">
+            <tr>
+                <th>Student Code</th>
+                <th>Student ID</th>
+                <th>Barangay ID</th>
+                <th>Year Level</th>
+                <th>School</th>
+                <th>Academic Year</th>
+                <th>Scholarship</th>
+                
+                <th>Action</th>
+            </tr>
+            {% for record in studentinfo %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
+                    <td>
+                        <form action="/studentinfo" method="post">
+                            <input type="submit" name="edit" value="EDIT">
+                            <input type="hidden" name="editstudentid" value="{{ record[1] }}">
+                            <input type="hidden" name="edityearlevel" value="{{ record[3] }}">
+                            <input type="hidden" name="editschool" value="{{ record[4] }}">
+                            <input type="hidden" name="editacademicyear" value="{{ record[5] }}">
+                            <input type="hidden" name="editscholarship" value="{{ record[6] }}">
+                            <input type="hidden" name="action" value="edit">
+                        </form>
+                        <form action="/studentinfo" method="post">
+                            <input type="submit" name="delete" value="DELETE">
+                            <input type="hidden" name="deletestudentid" value="{{ record[1] }}">
+                            <input type="hidden" name="action" value="delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+    
