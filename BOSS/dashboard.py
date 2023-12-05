@@ -5,6 +5,7 @@ class Dashboard:
     def __init__(self):
         self.db_connector = DatabaseConnection()
 
+class DashboardManager(Dashboard):
     def dashboard(self):
         try:
             # Ensure 'barangayid' is a valid value (you may need additional validation)
