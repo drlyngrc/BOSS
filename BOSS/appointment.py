@@ -60,12 +60,6 @@ class AppointmentResident:
 
         return render_template("Residents/Dashboard/Appointment/appointment.html", appointmentstatus=appointmentstatus, barangayid=barangayid)
 
-# Route for the process_appointment method
-@app.route('/dashboard/appointment', methods=['GET', 'POST'])
-def process_appointment():
-    appointment_instance = Appointment(db_connector)
-    return appointment_instance.process_appointment()
-
 # Note: In a real Flask application, the 'process_appointment' method would be called in response to this route.
 
 if __name__ == '__main__':
