@@ -3,7 +3,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, flash, session
 from connection import DatabaseConnection
 from login import Login
-from dashboard import Dashboard
+from dashboard import DashboardManager
 from appointment import AppointmentResident
 from updateResident import UpdateResident
 from medical import MedicalResident
@@ -49,7 +49,7 @@ student_instance = StudentManager(read_instance, delete_instance, update_instanc
 derived_tables_instance = DerivedTablesManager(read_instance)
 appointment_instance = AppointmentManager(read_instance, delete_instance, update_instance)
 
-dashboard_instance = Dashboard()
+dashboard_instance = DashboardManager()
 appointment_instance_resident = AppointmentResident(db_connection)
 update_instance_resident = UpdateResident()
 medical_instance_resident = MedicalResident()
@@ -75,6 +75,11 @@ def update_route():
 @app.route('/dashboard/medical', methods=['GET', 'POST'])
 def medical_route():
     return medical_instance_resident.process_medical()
+
+@app.route('/dashboard/appointment', methods=['GET', 'POST'])
+def process_appointment():
+    appointment_instance = AppointmentResident(db_connector)
+    return appointment_instance.process_appointment()
 
 # Log out
 @app.route('/logout', methods=['POST'])
