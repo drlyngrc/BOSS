@@ -1,0 +1,91 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, form, table {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a basic style to the whole page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Style the container for the form and table */
+.submain {
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form for creating a user */
+.create-main {
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 10px;
+    text-align: center;
+}
+
+.create-main h3 {
+    color: #333;
+}
+
+.create-main input,
+.create-main select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.create-main input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Style the table for displaying user information */
+.read-main {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.read-main th, .read-main td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.read-main th {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.read-main td {
+    background-color: #fff;
+}
+
+.read-main input[type="submit"] {
+    background-color: #2196f3;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+/* Style the forms inside the table */
+.read-main form {
+    display: inline-block;
+    margin: 0;
+}
+.create-main label.left-align {
+    display: block;
+    text-align: left;
+    width: 100%; /* Adjust the width as needed */
+    margin-bottom: 5px; /* Optional: Add some spacing between label and input */
+}
+
