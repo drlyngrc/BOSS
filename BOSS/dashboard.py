@@ -70,5 +70,5 @@ class DashboardManager(Dashboard):
             else:
                 return redirect(url_for('login_route'))
         except Exception as e:
-            current_app.logger.error(f"An error occurred: {str(e)}")
-            return render_template("error.html", message="An error occurred. Please try again later.")
+        # Handle exceptions, log, or return an error message
+            return f"An error occurred: {str(e)}"
