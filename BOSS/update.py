@@ -4,8 +4,12 @@ class Update:
     def __init__(self, db_connector):
         self.db = db_connector
 
-    def update_residentinfo(self, barangayid, category, lastname, firstname, middlename, sex, 
-                            birthdate, birthplace, religion, civilstat, citizenship, voterprecinct, contactno):
+    def update_entity(self, *args, **kwargs):
+        raise NotImplementedError("Subclasses must implement update_entity method")
+
+class ResidentInfoUpdater(Update):
+    def update_entity(self, barangayid, category, lastname, firstname, middlename, sex, 
+                      birthdate, birthplace, religion, civilstat, citizenship, voterprecinct, contactno):
         query = """
         UPDATE ResidentInfo
         SET 
