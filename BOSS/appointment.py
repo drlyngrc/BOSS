@@ -1,36 +1,66 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+from connection import DatabaseConnection
 
-class Appointment:
-    def __init__(self, read_instance, delete_instance, update_instance):
-        self.read_instance = read_instance
-        self.delete_instance = delete_instance
-        self.update_instance = update_instance
+app = Flask(__name__, static_url_path='/static')
+app.secret_key = 'secret'
 
-class AppointmentManager(Appointment):
-    def appointment(self, request):
-        if request.method == "POST":
-            if "action" in request.form:
-                if request.form["action"] == "delete":
-                    appointmentid = request.form["deleteappointmentid"]
-                    self.delete_instance.delete_appointment(appointmentid)
-                elif request.form["action"] == "edit":
-                    editappointmentid = request.form["editappointmentid"]
-                    editstatus = request.form["editstatus"]
+class AppointmentResident:
+    def __init__(self, db_connector):
+        self.db_connector = db_connector
 
-                    return redirect(url_for("updateAppointment", editappointmentid=editappointmentid, editstatus=editstatus))
+    def process_appointment(self):
+        if 'barangayid' not in session:
+            return redirect(url_for('login_route'))
 
-        appointment = self.read_instance.read_appointment()
-        return render_template("Admin/Appointment/appointment.html", appointment=appointment)
+        connection = self.db_connector.get_connection()
+        cursor = connection.cursor()
 
-    def updateAppointment(self, request):
-        if request.method == "POST":
-            updateappointmentid = request.form["updateappointmentid"]
-            updatestatus = request.form["updatestatus"]
-    
-            self.update_instance.update_appointment(updateappointmentid, updatestatus)
-            return redirect("/admin/appointment")
+        appointmentstatus = None  # Initialize the variable
+        barangayid = session['barangayid']
 
-        editappointmentid = request.args.get("editappointmentid")
-        editstatus = request.args.get("editstatus")
+        if request.method == 'POST':
+            purpose = request.form.get('purpose')
+            date = request.form.get('appointmentdate')
 
-        return render_template("Admin/Update/updateAppointment.html", editappointmentid=editappointmentid, editstatus=editstatus)
+            try:
+                # Check if an appointment with the given barangayid already exists
+                query_check_existing = "SELECT COUNT(*) FROM appointment WHERE barangayid = %s"
+                cursor.execute(query_check_existing, (barangayid,))
+                existing_count = cursor.fetchone()[0]
+
+                if existing_count > 0:
+                    appointmentstatus = "You already have an existing appointment. Only one appointment is allowed."
+                else:
+                    # Check if the count for the date reaches 5
+                    query_count = "SELECT COUNT(*) FROM appointment WHERE date = %s"
+                    cursor.execute(query_count, (date,))
+                    date_count = cursor.fetchone()[0]
+
+                    if date_count >= 5:
+                        appointmentstatus = "This date is no longer available. Please choose another date."
+                    else:
+                        # Your existing code to insert into the database
+                        query_insert = "INSERT INTO appointment (barangayid, purpose, date, status) VALUES (%s, %s, %s, %s)"
+                        values_insert = (barangayid, purpose, date, "Pending")
+                        cursor.execute(query_insert, values_insert)
+
+                        connection.commit()
+                        appointmentstatus = "Wait for the response of an admin"
+
+            except Exception as e:
+                # Handle any exceptions or errors that may occur during the database operation
+                connection.rollback()
+                print(f"Error: {str(e)}")
+                appointmentstatus = f"Failed to register the appointment: {str(e)}"
+
+            finally:
+                # Close the cursor and database connection
+                cursor.close()
+                connection.close()
+
+        return render_template("Residents/Dashboard/Appointment/appointment.html", appointmentstatus=appointmentstatus, barangayid=barangayid)
+
+# Note: In a real Flask application, the 'process_appointment' method would be called in response to this route.
+
+if __name__ == '__main__':
+    app.run(debug=True)
