@@ -1,4 +1,4 @@
-from flask import render_template, session, redirect, request
+from flask import render_template, session, redirect, request, url_for
 from connection import DatabaseConnection
 
 class UpdateResident:
