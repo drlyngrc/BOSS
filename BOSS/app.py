@@ -12,7 +12,7 @@ from medical import MedicalResident
 import os
 from create import Create
 from read import Read
-from update import Update
+from update import Update, ResidentInfoUpdater
 from delete import Delete
 from database_connector import DatabaseConnector
 from werkzeug.utils import secure_filename
@@ -39,9 +39,10 @@ create_instance = Create(db_connector)
 read_instance = Read(db_connector)
 update_instance = Update(db_connector)
 delete_instance = Delete(db_connector)
+resident_updater = ResidentInfoUpdater(db_connector)
 
 case_instance = CaseManager(create_instance, read_instance, delete_instance, update_instance)
-resident_instance = ResidentManager(read_instance, delete_instance, update_instance)
+resident_instance = ResidentManager(read_instance, delete_instance, update_instance, resident_updater)
 medical_instance = MedicalManager(read_instance, delete_instance, update_instance)
 address_instance = AddressManager(read_instance, delete_instance, update_instance)
 adult_instance = AdultManager(read_instance, delete_instance, update_instance)
