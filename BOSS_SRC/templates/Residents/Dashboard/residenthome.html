@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resident Dashboard | BOSS</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Barangay Online Services System <br>
+            <small><i>Resident Dashboard</i></small>
+        </h1>
+    </header>
+    
+    <section class="profile-section"> 
+        <div class="container profile-container">
+            {% if profile_picture %}
+                <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profile Picture">
+            {% else %}
+                <p>No profile picture available.</p>
+            {% endif %}
+            
+            <div class="profile">
+                <p>Name: <strong>{{firstname}} {{middlename}} {{lastname}}</strong>
+                <br><br>Category:          <strong>{{category}}</strong>
+                <br><br>Sex:          <strong>{{sex}}</strong>
+                <br><br>Address:      <strong>{{address}}</strong>
+                <br><br>Contact No.:  <strong>{{contactno}}</strong>
+                {% if voterprecinctno == "None" %}
+                {% else %} 
+                <br><br>Precinct No.: <strong>{{ voterprecinctno }}</strong></p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="sign-out-button">
+            <a href="/">Sign Out</a>
+        </div>
+    </section>
+
+    <main>
+        <section class="dashboard-section">
+            <h2>Update Profile</h2>
+            <ul>
+                <form id="residentForm" action="/admin/residentinfo" method="post">
+                    <a href="{{ url_for('update_route') }}">Update Profile</a>         
+            </ul>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Appointment Slot</h2>
+            <ul>
+                <form id="householdForm" action="/admin/householdinfo" method="post">
+                    <a href="{{ url_for('appointment_route') }}">Appointment Slot</a><br>
+                    <p style="margin-bottom: 5px; font-size: 0.75rem; font-family: Arial, Helvetica, sans-serif; margin-bottom: 10px;">Appointment Status: <strong>{{apstatus}}</strong></p>
+                </form>
+            </ul>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Medical Info</h2>
+            <ul>
+                <form id="accRegister" action="/admin/registration" method="post">
+                    <a href="{{ url_for('medical_route') }}">Medical Info</a>
+                </form>
+            </ul>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Download Form</h2>
+            <ul>
+                <form id="residentForm" action="/admin/residentinfo" method="post">
+                    <form id="downloadForm">
+                        <select id="formType" name="formType">
+                            <option value="individual">Individual Form</option>
+                            <option value="ctc">CTC Form (Community Tax Certificate)</option>
+                            <option value="householdHelp">Household Help Form</option>
+                            <option value="pwd">PWD Application</option>
+                            <option value="soloParent">Solo Parent Application</option>
+                            <option value="scholarship">Scholarship</option>
+                        </select>
+                        
+                    </form><br>
+                    <button type="button" onclick="downloadForm()">Download</button>
+                    <script>
+                        function downloadForm() {
+                            var formType = document.getElementById("formType").value;
+            
+                            // Construct the direct path to the file in the "static/files" folder
+                            var fileURL = "/static/files/" + formType.toLowerCase().replace(/\s/g, "_") + "_form.pdf";
+            
+                            // Create a dummy link element and trigger the download
+                            var link = document.createElement("a");
+                            link.href = fileURL;
+                            link.download = formType.toLowerCase().replace(/\s/g, "_") + "_form.pdf"; // Set the download attribute
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                    </script>
+                </form>            
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2023 Barangay Online Services System
+    </footer>
+
+</body>
+</html>

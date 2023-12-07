@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCOUNT REGISTRATION</title>
+    <link rel="stylesheet" href="/static/functionstyles.css">
+    <style>
+        .conditional-form {
+            display: none;
+        }
+        .show-adult .conditional-form#adultInfo,
+        .show-student .conditional-form#studentInfo {
+            display: block;
+        }
+        .back-button {
+            margin-top: 20px;
+            margin-left: 55px;
+            padding: 10px 10px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <a href="/admin" class="back-button">BACK</a>               
+    <div class="submain">
+        <form class="create-main" action="/admin/registration" method="post" enctype="multipart/form-data">
+            <h3>ACCOUNT REGISTRATION</h3>
+
+            <!-- Common Login Information -->
+            <input type="text" name="barangayid" id="barangayid" placeholder="Barangay ID" required />
+            <input type="text" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+
+            <!-- Resident Information -->
+            <input type="text" name="lastname" placeholder="Last Name" required />
+            <input type="text" name="firstname" placeholder="First Name" required />
+            <input type="text" name="middlename" placeholder="Middle Name" required />
+            <select name="sex" required>
+                <option value="">Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <label for="birthdate" class="left-align">Birthdate:</label>
+            <input type="date" name="birthdate" required placeholder="Birthdate">
+            <input type="text" name="birthplace" placeholder="Birthplace" required />
+            <input type="text" name="religion" placeholder="Religion" required />
+            <select name="civilstat" required>
+                <option value="">Civil Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widowed">Widowed</option>
+            </select>
+            <input type="text" name="citizenship" placeholder="Citizenship" required />
+            <input type="text" name="voterprecinct" placeholder="Voter Precinct No." required />
+            <input type="text" name="contactno" placeholder="Contact Number" required />
+            <label for="profile_picture" class="left-align">Profile Picture:</label>
+            <input type="file" name="profile_picture" accept="image/*" />
+            <select name="category" required onchange="toggleForms(this.value)">
+                <option value="">Select Category</option>
+                <option value="Adult">Adult</option>
+                <option value="Student">Student</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <!-- Conditional Forms based on Category Selection -->
+            <div id="adultInfo" class="conditional-form">
+                <!-- Adult Information -->
+                <input type="hidden" name="adult_barangayid" id="adult_barangayid" />
+                <select name="employmentstatus" required>
+                    <option value="">Employment Status</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Unemployed">Unemployed</option>
+                    <option value="Self-employed">Self-employed</option>
+                </select>
+                <input type="text" name="monthlyincome" placeholder="Monthly Income (e.g. 1234.00)" required />
+            </div>
+
+            <div id="studentInfo" class="conditional-form">
+                <!-- Student Information -->
+                <input type="hidden" name="student_barangayid" id="student_barangayid" />
+                <input type="text" name="yearlevel" placeholder="Year Level" required />
+                <input type="text" name="school" placeholder="School" required />
+                <input type="text" name="academicyear" placeholder="Academic Year" required />
+                <input type="text" name="scholarship" placeholder="Scholarship" />
+            </div>
+
+            <!-- Address Information -->
+            <input type="hidden" name="address_barangayid" id="address_barangayid" />
+            <input type="text" name="houseno" placeholder="Household No." required />
+            <select name="zone" required>
+                <option value="">Zone</option>
+                <option value="1">Zone 1</option>
+                <option value="2">Zone 2</option>
+                <option value="3">Zone 3</option>
+                <option value="4">Zone 4</option>
+            </select>
+            <input type="text" name="streetname" placeholder="Street Name" required />
+            <input type="text" name="city" placeholder="City" required />
+            <input type="text" name="province" placeholder="Province" required />
+
+            <!-- Medical Information -->
+            <input type="hidden" name="medical_barangayid" id="medical_barangayid" />
+            <select name="bmiclassification" required>
+                <option value="">BMI Classification</option>
+                <option value="Normal">Normal</option>
+                <option value="Underweight">Underweight</option>
+                <option value="Overweight">Overweight</option>
+                <option value="Obese">Obese</option>
+            </select>
+            <input type="text" name="medicalcondition" placeholder="Medical Condition" />
+            <select name="covidvaccinated" required>
+                <option value="">COVID Vaccinated?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <select name="maintenancemedicine" required>
+                <option value="">Taking Maintenance Medicine?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <select name="physicalfitness" required>
+                <option value="">Physical Fitness</option>
+                <option value="PF">Physically Fit</option>
+                <option value="NPF">Not Physically Fit</option>
+            </select>
+            <input type="hidden" name="action" value="create">
+            <input type="submit" value="SUBMIT" />
+        </form>
+    </div>
+
+    <script>
+        function toggleForms(category) {
+            const adultInfo = document.getElementById('adultInfo');
+            const studentInfo = document.getElementById('studentInfo');
+    
+            // Reset display property
+            adultInfo.style.display = 'none';
+            studentInfo.style.display = 'none';
+    
+            // Show the appropriate form based on the selected category
+            if (category === 'Adult') {
+                adultInfo.style.display = 'block';
+                // Set required for adult fields
+                setRequired(adultInfo, true);
+                setRequired(studentInfo, false);
+            } else if (category === 'Student') {
+                studentInfo.style.display = 'block';
+                // Set required for student fields
+                setRequired(adultInfo, false);
+                setRequired(studentInfo, true);
+            } else {
+                // If category is 'Others', make both not required
+                setRequired(adultInfo, false);
+                setRequired(studentInfo, false);
+            }
+        }
+    
+        function setRequired(container, isRequired) {
+            // Set required attribute for all input/select elements inside the container
+            const elements = container.querySelectorAll('input, select');
+            elements.forEach(element => {
+                element.required = isRequired;
+            });
+        }
+    
+        document.getElementById('barangayid').addEventListener('input', function () {
+            // Update hidden fields with the same Barangay ID
+            document.getElementById('adult_barangayid').value = this.value;
+            document.getElementById('student_barangayid').value = this.value;
+            document.getElementById('address_barangayid').value = this.value;
+            document.getElementById('medical_barangayid').value = this.value;
+        });
+    </script>
+</body>
+</html>
