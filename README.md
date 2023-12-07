@@ -8,24 +8,8 @@
 <!-- Description -->
 ## 📄 Description
 
-BOSS (Barangay Online Service System) is a comprehensive system designed to facilitate various services within a barangay online. It simplifies and centralizes processes for community services, aiming to streamline interactions between residents and the local government.
+BOSS (Barangay Online Service System) is a comprehensive system designed to facilitate various services within a barangay online. It simplifies and centralizes processes for community services, aiming to streamline interactions between residents and the local government. This is a project developed as part of Object-Oriented Programming (OOP) and Database Management Systems (DBMS) coursework. It aims to offer a comprehensive online platform for various barangay services.
 
-<!-- Table of Contents -->
-## 📋 Table of Contents
-
-- [Introduction](#-introduction)
-- [Features](#-features)
-- [Technologies Used](#-technologies-used)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Database Schema](#-database-schema)
-- [Contributors](#-contributors)
-- [Project Context](#-project-context)
-
-<!-- Introduction -->
-## 🌟 Introduction
-
-BOSS (Barangay Online Service System) is a project developed as part of Object-Oriented Programming (OOP) and Database Management Systems (DBMS) coursework. It aims to offer a comprehensive online platform for various barangay services.
 
 <!-- Features -->
 ## ✨ Features
@@ -35,7 +19,6 @@ BOSS (Barangay Online Service System) is a project developed as part of Object-O
 - Real-time tracking: Residents can track the progress of their appointment status.
 - Document management: Residents can download forms.
 - Database integration for efficient data handling
-- Responsive web design for user-friendly interface
 
 ## Target users
 
@@ -49,23 +32,55 @@ BOSS (Barangay Online Service System) is a project developed as part of Object-O
 - Database: MySQL 
 - Other tools: Visual Studio Code
 
-<!-- Installation -->
-## ⚙️ Installation
-
-1. Clone the repository: `git clone https://github.com/drlyngrc/BOSS.git`
-2. Install dependencies: `command or steps to install dependencies`
-3. Additional configuration steps, if any.
 
 <!-- Usage -->
-## 🚦 Usage
+## 🚦 Steps to try BOSS
 
-1. Detailed steps or commands to run the project.
-2. Provide examples or instructions for interaction.
+**1. Setup and start XAMPP:**
 
-<!-- Database Schema -->
-## 🗄️ Database Schema
+* Open XAMPP control panel.
+* Start **Apache** and **MySQL** services.
 
-Include a visual representation or textual description of your database schema if applicable.
+**2. Import database:**
+
+* Download the **barangay_official.sql** file.
+* Open **phpMyAdmin** in your web browser (usually http://localhost/phpmyadmin/).
+* Create a database named **barangay_official**.
+* Import the **barangay_official.sql** file into the newly created database.
+
+**3. Install dependencies:**
+
+* Open a command prompt or terminal.
+* Run the following command to install the required MySQL connector:
+
+```
+pip install mysql-connector-python
+```
+
+**4. Run the application:**
+
+* Open Visual Studio Code.
+* Open the **app.py** file.
+* In your terminal, navigate to the directory containing the **app.py** file.
+* Run the following command to start the application:
+
+```
+python app.py
+```
+
+**5. Explore the system:**
+
+* Open your web browser and navigate to http://127.0.0.1:5000.
+* This should take you to the login page.
+* Explore the different features and functionalities of the system.
+
+**Additional notes:**
+
+* Make sure XAMPP and MySQL are running before attempting to run the application.
+* Ensure you have downloaded the correct database file and imported it into the appropriate database.
+
+**Enjoy your experience with BOSS!**
+
 
 <!-- Contributors -->
 ## 👥 Contributors
