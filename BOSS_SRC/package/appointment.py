@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 class Appointment:
-    def __init__(self, read_instance, delete_instance, update_instance):
+    def __init__(self, read_instance, delete_instance, update_instance, resident_updater):
         self.read_instance = read_instance
         self.delete_instance = delete_instance
         self.update_instance = update_instance
+        self.resident_updater = resident_updater
 
 class AppointmentManager(Appointment):
     def appointment(self, request):
@@ -27,7 +28,7 @@ class AppointmentManager(Appointment):
             updateappointmentid = request.form["updateappointmentid"]
             updatestatus = request.form["updatestatus"]
     
-            self.update_instance.update_appointment(updateappointmentid, updatestatus)
+            self.resident_updater.update_appointment(updateappointmentid, updatestatus)
             return redirect("/admin/appointment")
 
         editappointmentid = request.args.get("editappointmentid")
