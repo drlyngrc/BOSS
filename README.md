@@ -22,7 +22,7 @@ BOSS (Barangay Online Service System) is a comprehensive system designed to faci
 
 ## Target users
 
-  - Barangay officials: BOSS provides barangay officials with a centralized platform to manage service requests, track applications, and communicate with residents.
+  - Barangay officials: BOSS provides barangay officials with a centralized platform to manage service requests and track appointments.
   - Residents: BOSS empowers residents to access essential services conveniently and efficiently from the comfort of their own homes.
 
 <!-- Technologies Used -->
