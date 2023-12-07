@@ -30,23 +30,29 @@ BOSS (Barangay Online Service System) is a project developed as part of Object-O
 <!-- Features -->
 ## ✨ Features
 
-- Streamlined service requests for residents
 - Admin portal for barangay officials to manage services
+- Residents portal 
+- Real-time tracking: Residents can track the progress of their appointment status.
+- Document management: Residents can download forms.
 - Database integration for efficient data handling
 - Responsive web design for user-friendly interface
+
+## Target users
+
+  - Barangay officials: BOSS provides barangay officials with a centralized platform to manage service requests, track applications, and communicate with residents.
+  - Residents: BOSS empowers residents to access essential services conveniently and efficiently from the comfort of their own homes.
 
 <!-- Technologies Used -->
 ## 🔧 Technologies Used
 
-- Programming Languages: Python, HTML, CSS, SQL
-- Frameworks: [Any frameworks used]
-- Database: [Database management system used]
-- Other tools: [e.g., IDE, version control]
+- Programming Languages: Python, HTML, CSS, JAVASCRIPT
+- Database: MySQL 
+- Other tools: Visual Studio Code
 
 <!-- Installation -->
 ## ⚙️ Installation
 
-1. Clone the repository: `git clone https://github.com/drlyngrc/BOSS_admin.git`
+1. Clone the repository: `git clone https://github.com/drlyngrc/BOSS.git`
 2. Install dependencies: `command or steps to install dependencies`
 3. Additional configuration steps, if any.
 
