@@ -85,11 +85,12 @@ python app.py
 <!-- Contributors -->
 ## 👥 Contributors
 
-- Barican, John Andrei A.
-- Guinoban, Glenn M.
-- Lalongisip, Darlyne Grace M.
-- Magnaye, James Michael D.
-- Zamora, Clarence C.
+- [Barican, John Andrei A.](https://github.com/e4677)
+- [Guinoban, Glenn M.](https://github.com/GUINOBAN)
+- [Lalongisip, Darlyne Grace M.](https://github.com/drlyngrc)
+- [Magnaye, James Michael D.](https://github.com/ratatatatcode)
+- [Zamora, Clarence C.](https://github.com/DonClarko)
+
 
 <!-- Project Context -->
 ## 🌐 Project Context
