@@ -21,7 +21,6 @@ BOSS (Barangay Online Service System) is a comprehensive system designed to faci
 - [Database Schema](#-database-schema)
 - [Contributors](#-contributors)
 - [Project Context](#-project-context)
-- [License](#-license)
 
 <!-- Introduction -->
 ## 🌟 Introduction
@@ -76,7 +75,3 @@ Include a visual representation or textual description of your database schema i
 
 This project was developed as a collaborative effort for an Object-Oriented Programming (OOP) and Database Management Systems (DBMS) course. 
 
-<!-- License -->
-## 📜 License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
