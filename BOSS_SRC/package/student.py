@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 class Student:
-    def __init__(self, read_instance, delete_instance, update_instance):
+    def __init__(self, read_instance, delete_instance, update_instance, resident_updater):
         self.read_instance = read_instance
         self.delete_instance = delete_instance
         self.update_instance = update_instance
+        self.resident_updater = resident_updater
 
 class StudentManager(Student):
     def studentinfo(self, request):
@@ -36,7 +37,7 @@ class StudentManager(Student):
             updateacademicyear = request.form["updateacademicyear"]
             updatescholarship = request.form["updatescholarship"]
 
-            self.update_instance.update_studentinfo(updatestudentid, updateyearlevel, updateschool,
+            self.resident_updater.update_studentinfo(updatestudentid, updateyearlevel, updateschool,
                                                      updateacademicyear, updatescholarship)
             return redirect("/admin/studentinfo")
 
