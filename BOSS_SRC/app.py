@@ -41,14 +41,14 @@ update_instance = Update(db_connector)
 delete_instance = Delete(db_connector)
 resident_updater = ResidentInfoUpdater(db_connector)
 
-case_instance = CaseManager(create_instance, read_instance, delete_instance, update_instance)
+case_instance = CaseManager(create_instance, read_instance, delete_instance, update_instance, resident_updater)
 resident_instance = ResidentManager(read_instance, delete_instance, update_instance, resident_updater)
-medical_instance = MedicalManager(read_instance, delete_instance, update_instance)
-address_instance = AddressManager(read_instance, delete_instance, update_instance)
-adult_instance = AdultManager(read_instance, delete_instance, update_instance)
-student_instance = StudentManager(read_instance, delete_instance, update_instance)
+medical_instance = MedicalManager(read_instance, delete_instance, update_instance, resident_updater)
+address_instance = AddressManager(read_instance, delete_instance, update_instance, resident_updater)
+adult_instance = AdultManager(read_instance, delete_instance, update_instance, resident_updater)
+student_instance = StudentManager(read_instance, delete_instance, update_instance, resident_updater)
 derived_tables_instance = DerivedTablesManager(read_instance)
-appointment_instance = AppointmentManager(read_instance, delete_instance, update_instance)
+appointment_instance = AppointmentManager(read_instance, delete_instance, update_instance, resident_updater)
 
 dashboard_instance = DashboardManager()
 appointment_instance_resident = AppointmentResident(db_connection)
@@ -89,9 +89,6 @@ def logout():
     session.pop('barangayid', None)
     print("After Logout:", session)
     return redirect(url_for('login_route'))
-
-
-
 
 
 
