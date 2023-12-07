@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRGY Portal</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='update.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Barangay Online Services System <br>
+            <small><i>Update Profile</i></small>
+        </h1>
+    </header>
+    <div class="flex-container">
+        <form action="{{ url_for('update_route') }}" method="post" onsubmit="return formatDate()" enctype="multipart/form-data">
+            <div class="top">
+                <a href="{{ url_for('dashboard_route') }}"><img src="{{ url_for('static', filename='images/return.png') }}" alt=""></a>
+            </div>
+            <!-- Personal Information/ResidentInfo-->
+           
+            <!--  -->
+            <p><strong>{{ barangayid }}</strong></p>
+            <input required type="text" name="birthplace" placeholder="Place of Birth">
+            <input required type="text" name="citizenship" placeholder="Citizenship">
+            <br><br>
+            <!--  -->
+            <input required type="text" name="religion" placeholder="Religion">
+            <input required type="text" name="civilstat" placeholder="Civil Status">
+            <br><br>
+            <!--  -->
+            <input required type="text" name="contactno" placeholder="Contact Number">
+            <input required type="text" name="email" placeholder="Email">
+            <br>
+            <!--  -->
+
+            <!-- Address/AddressInfo -->
+            <p style="font-size: 0.75rem; font-family: Arial, Helvetica, sans-serif;"><strong>Address</strong></p>
+            <input required type="text" name="householdno" placeholder="House Hold Number">
+            <select required id="zone" name="zone" style="padding: 5px">
+                <option value="1">Zone 1</option>
+                <option value="2">Zone 2</option>
+                <option value="3">Zone 3</option>
+                <option value="4">Zone 4</option>
+                <option value="5">Zone 5</option>
+                <option value="6">Zone 6</option>
+            </select>
+            <br><br>
+            <input required type="text" name="streetname" placeholder="Street Name">
+            <input required type="text" name="city" placeholder="City">
+            <br><br>
+            <input required type="text" name="province" placeholder="Province">
+            <!--  -->
+            <br>
+            <!--  -->
+            <p style="font-size: 0.75rem; font-family: Arial, Helvetica, sans-serif;"><strong>Category</strong></p>
+            <select required id="category" name="selectedOption" style="padding: 5px" onchange="showAdditionalFields()">
+                <option value="others">Others</option>
+                <option value="student">Student</option>
+                <option value="adult">Adult</option>
+            </select>
+            <br><br>
+            <!--  -->
+            <!-- Additional Fields for Student -->
+            <div id="studentFields" style="display: none;">
+                <input id="yearlevel" type="text" name="yearlevel" placeholder="Year Level">
+                <input id="schoolenrolledto"  type="text" name="schoolenrolledto" placeholder="School Enrolled To">
+                <br><br>
+                <input id="acedemicyear"  type="text" name="acedemicyear" placeholder="Academic Year">
+                <input id="scholarship"  type="text" name="scholarship" placeholder="Scholarship">           
+            </div>
+            <!-- Additional Fields for Adult -->
+            <div id="adultFields" style="display: none;">
+                <input id="employmentstatus"  type="text" name="employmentstatus" placeholder="Employent Status">
+                <input id="monthlyincome"  type="text" name="monthlyincome" placeholder="Monthly Income">
+                <br><br>
+            </div>
+            <!-- Fields for Others -->
+            <div id="othersField">
+                <p style="font-size: 0.85rem; font-family: Arial, Helvetica, sans-serif;">If the resident is neither a student nor an adult,
+                <br>please choose 'Others' and click 'Submit' when you are done.</p>
+            </div>
+            <!-- Submit -->
+            <input type="submit">
+            <br><br>
+        </form>
+    </div>
+
+    <script>
+        function showAdditionalFields() {
+            let selectedOption = document.getElementById("category").value;
+
+            document.getElementById("studentFields").style.display = "none";
+            document.getElementById("adultFields").style.display = "none";
+            document.getElementById("othersField").style.display = "none";
+
+            if (selectedOption === "student") {
+                document.getElementById("studentFields").style.display = "block";
+                document.getElementById("othersField").style.display = "none";
+
+                document.getElementById("yearlevel").required = true;
+                document.getElementById("schoolenrolledto").required = true;
+                document.getElementById("acedemicyear").required = true;
+                document.getElementById("scholarship").required = true;
+
+                document.getElementById("employmentstatus").required = false;
+                document.getElementById("monthlyincome").required = false;
+            } else if (selectedOption === "adult") {
+                document.getElementById("adultFields").style.display = "block";
+                document.getElementById("othersField").style.display = "none";
+
+                document.getElementById("employmentstatus").required = true;
+                document.getElementById("monthlyincome").required = true;
+
+                document.getElementById("yearlevel").required = false;
+                document.getElementById("schoolenrolledto").required = false;
+                document.getElementById("acedemicyear").required = false;
+                document.getElementById("scholarship").required = false;
+            } else if (selectedOption === "others") {
+                document.getElementById("othersField").style.display = "block";
+
+                document.getElementById("yearlevel").required = false;
+                document.getElementById("schoolenrolledto").required = false;
+                document.getElementById("acedemicyear").required = false;
+                document.getElementById("scholarship").required = false;
+                document.getElementById("employmentstatus").required = false;
+                document.getElementById("monthlyincome").required = false;
+            }
+        }
+        
+        function reloadPage() {
+            // Check if the 'reload' query parameter is present
+            var queryParams = getQueryParams();
+            if (queryParams.reload === 'true') {
+                // Hide the message and button
+                document.getElementById('registrationMessage').style.display = 'none';
+                document.getElementById('registerNewAccountButton').style.display = 'none';
+
+                // Remove the 'reload' query parameter to prevent hiding on subsequent reloads
+                var currentUrl = window.location.href.split('?')[0];
+                history.replaceState({}, document.title, currentUrl);
+            } else {
+                // Reload the page with the 'reload' query parameter
+                location.href = window.location.href + '?reload=true';
+            }
+        }
+
+        function getQueryParams() {
+            var params = {};
+            window.location.search.replace(
+                /[?&]+([^=&]+)=([^&]*)/gi,
+                function (match, key, value) {
+                    params[key] = decodeURIComponent(value);
+                }
+            );
+            return params;
+        }
+    </script>
+
+<footer>
+    &copy; 2023 Barangay Online Services System
+</footer>
+</body>
+</html>

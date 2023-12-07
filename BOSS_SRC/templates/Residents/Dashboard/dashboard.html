@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <form method="post" action="{{ url_for('logout') }}">
+                <button type="submit" style="margin: 5px;">Logout</button>
+            </form>
+        </div>
+
+        <br>
+        <div class="container">
+            {% if profile_picture %}
+                <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profile Picture">
+            {% else %}
+                <p>No profile picture available.</p>
+            {% endif %}
+            
+            <div class="profile">
+                <p>Name: <strong>{{firstname}} {{middlename}} {{lastname}}</strong></p>
+                <p>Category:          <strong>{{category}}</strong></p>
+                <p>Sex:          <strong>{{sex}}</strong></p>
+                <p>Address:      <strong>{{address}}</strong></p>
+                <p>Contact No.:  <strong>{{contactno}}</strong></p>
+                {% if voterprecinctno == "None" %}
+                {% else %} 
+                    <p>Precinct No.: <strong>{{ voterprecinctno }}</strong></p>
+                {% endif %}
+            </div>
+        </div>
+        <br><br>
+        <div class="features">
+            <a href="{{ url_for('update_route') }}">Update Profile</a>
+            <br>
+            <p style="margin-bottom: 5px; font-size: 0.75rem; font-family: Arial, Helvetica, sans-serif; margin-bottom: 10px;">Appointment Status: <strong>{{apstatus}}</strong></p>
+            <a href="{{ url_for('appointment_route') }}">Appointment Slot</a>
+            <br>
+            <a href="{{ url_for('medical_route') }}">Medical Info</a>
+        </div>
+        <br>
+
+        <p style="font-size: 0.90rem;">Download Form</p>
+        <form id="downloadForm">
+            <select id="formType" name="formType">
+                <option value="individual">Individual Form</option>
+                <option value="ctc">CTC Form (Community Tax Certificate)</option>
+                <option value="householdHelp">Household Help Form</option>
+                <option value="pwd">PWD Application</option>
+                <option value="soloParent">Solo Parent Application</option>
+                <option value="scholarship">Scholarship</option>
+            </select>
+
+            <button type="button" onclick="downloadForm()">Download</button>
+        </form>
+
+        <script>
+            function downloadForm() {
+                var formType = document.getElementById("formType").value;
+
+                // Construct the direct path to the file in the "static/files" folder
+                var fileURL = "/static/files/" + formType.toLowerCase().replace(/\s/g, "_") + "_form.pdf";
+
+                // Create a dummy link element and trigger the download
+                var link = document.createElement("a");
+                link.href = fileURL;
+                link.download = formType.toLowerCase().replace(/\s/g, "_") + "_form.pdf"; // Set the download attribute
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        </script>
+    </div>
+</body>
+</html>
