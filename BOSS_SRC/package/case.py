@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 class Case:
-    def __init__(self, create_instance, read_instance, delete_instance, update_instance):
+    def __init__(self, create_instance, read_instance, delete_instance, update_instance, resident_updater):
         self.create_instance = create_instance
         self.read_instance = read_instance
         self.delete_instance = delete_instance
         self.update_instance = update_instance
+        self.resident_updater = resident_updater
 
 class CaseManager(Case):
     def caseinfo(self, request):
@@ -36,7 +37,7 @@ class CaseManager(Case):
             updatecasedesc = request.form["updatecasedesc"]
             updatecasestatus = request.form["updatecasestatus"]
 
-            self.update_instance.update_caseinfo(updatecaseid, updatecasedesc, updatecasestatus)
+            self.resident_updater.update_caseinfo(updatecaseid, updatecasedesc, updatecasestatus)
             return redirect("/admin/caseinfo")
 
         editcaseid = request.args.get("editcaseid")
